@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>The Royal Chronicle — Fuffi | Maharana Palace</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600;700&family=Tangerine:wght@400;700&family=Poppins:wght@200;300;400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cream': '#FAF6EE',
+            'cream-deep': '#F2EBDE',
+            'sage': '#87A08A',
+            'sage-deep': '#5A6E5D',
+            'sage-light': '#C4D5C0',
+            'blush': '#D9A5A0',
+            'blush-light': '#F0D6D2',
+            'antique-gold': '#B8975A',
+            'antique-gold-light': '#E4D3AC',
+            'olive-ink': '#2F3B30',
+            'warm-brown': '#5C4A3F',
+          },
+          fontFamily: {
+            'serif': ['"Cormorant Garamond"', 'serif'],
+            'display': ['"Cinzel"', 'serif'],
+            'script': ['"Tangerine"', 'cursive'],
+            'sans': ['"Poppins"', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-cream: #FAF6EE;
+      --accent-sage: #87A08A;
+      --ink: #2F3B30;
+      --glass-royal: rgba(255, 255, 255, 0.55);
+      --border-sage: rgba(135, 160, 138, 0.4);
+      --shadow-palace: 0 22px 45px -15px rgba(90, 110, 93, 0.28);
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      overflow-y: scroll;
+      height: 100%;
+      scrollbar-width: none;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: #3D4A3E;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none"><path d="M20 20 L30 15 L40 20 L35 30 L25 30 Z" fill="%2387A08A" fill-opacity="0.09"/><path d="M70 70 L80 65 L90 70 L85 80 L75 80 Z" fill="%23D9A5A0" fill-opacity="0.09"/><circle cx="50" cy="50" r="3" fill="%23B8975A" fill-opacity="0.12"/></svg>');
+      background-size: 180px 180px;
+    }
+
+    section {
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+      height: 100vh;
+      height: 100dvh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      box-sizing: border-box;
+      padding: 1.2rem;
+    }
+
+    h1, h2, h3, .royal-font {
+      font-family: 'Cinzel', serif;
+    }
+
+    .cormorant-font {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .script-font {
+      font-family: 'Tangerine', cursive;
+    }
+
+    .palace-card {
+      background: var(--glass-royal);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--border-sage);
+      box-shadow: var(--shadow-palace);
+      border-radius: 2.5rem;
+    }
+
+    /* Antique gold gradient for "weds" */
+    .maharaja-gold {
+      background: linear-gradient(135deg, #8B6D2F 0%, #C9A96E 30%, #D4AF37 60%, #E8D9A8 80%, #8B6D2F 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: royalShine 7s ease-in-out infinite;
+    }
+
+    /* Sage gradient for names/headings */
+    .sage-gradient-text {
+      background: linear-gradient(135deg, #3E5242 0%, #5A6E5D 25%, #87A08A 50%, #B7CBB3 75%, #3E5242 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: royalShine 6s ease-in-out infinite;
+    }
+
+    /* Blush gradient accent */
+    .blush-gradient-text {
+      background: linear-gradient(135deg, #B4706B 0%, #D9A5A0 30%, #EBC4C0 60%, #F5DAD7 80%, #B4706B 100%);
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      animation: royalShine 6s ease-in-out infinite;
+    }
+
+    @keyframes royalShine {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+
+    #cursor-dot {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 10px; height: 10px;
+      background-color: #87A08A;
+      border-radius: 50%;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 18px rgba(135, 160, 138, 0.9);
+    }
+
+    #cursor-ring {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 42px; height: 42px;
+      border: 1.5px solid rgba(135, 160, 138, 0.55);
+      border-radius: 50%;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.2s ease-out;
+    }
+
+    .touch-ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(135,160,138,0.45) 0%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%) scale(0);
+      animation: rippleAnim 0.7s ease-out forwards;
+    }
+
+    @keyframes rippleAnim {
+      to { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+    }
+
+    /* DOTTED BORDER STYLES */
+    .dotted-border {
+      border: 2.5px dashed rgba(135, 160, 138, 0.55) !important;
+      border-radius: 2.5rem;
+      position: relative;
+    }
+    .dotted-border-light {
+      border: 2px dashed rgba(135, 160, 138, 0.35) !important;
+      border-radius: 2.5rem;
+    }
+    .dotted-border-glow {
+      border: 2.5px dashed rgba(135, 160, 138, 0.6) !important;
+      border-radius: 2.5rem;
+      box-shadow: 0 0 28px rgba(135, 160, 138, 0.18);
+    }
+
+    ::-webkit-scrollbar { display: none; }
+
+    @media (max-width: 768px) {
+      section#section-4 {
+        padding: 1rem;
+        justify-content: center;
+      }
+      #section-4 h2 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+      #section-4 .cormorant-font {
+        font-size: 1.7rem;
+        margin-bottom: 2rem;
+      }
+      #hidden-dua-card {
+        padding: 1.2rem 1.5rem;
+        margin: 0 0.5rem;
+      }
+      #hidden-dua-card p {
+        font-size: 1.4rem;
+        line-height: 1.5;
+      }
+      #secret-star-container {
+        margin-top: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #section-4 h2 {
+        font-size: 2.3rem;
+      }
+      #section-4 .cormorant-font {
+        font-size: 1.4rem;
+      }
+      #hidden-dua-card p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body class="relative">
+
+  <div id="cursor-dot" class="hidden md:block"></div>
+  <div id="cursor-ring" class="hidden md:block"></div>
+
+  <canvas id="royal-bg-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0"></canvas>
+
+  <div class="fixed inset-0 pointer-events-none z-0" style="background: radial-gradient(ellipse at 50% 0%, rgba(135,160,138,0.14) 0%, transparent 60%), radial-gradient(ellipse at 80% 90%, rgba(217,165,160,0.12) 0%, transparent 55%);"></div>
+
+  <main class="relative z-10">
+
+    <!-- SECTION 1: GRAND ENTRANCE -->
+    <section id="section-1" class="w-full flex flex-col items-center justify-center relative text-center">
+      <div class="absolute w-[500px] h-[500px] bg-sage/20 rounded-full blur-[130px] pointer-events-none"></div>
+      <div class="absolute w-[350px] h-[350px] bg-blush/15 rounded-full blur-[120px] pointer-events-none translate-x-40 translate-y-20"></div>
+      
+      <div class="max-w-5xl mx-auto flex flex-col items-center relative z-10">
+        <div class="mb-6 px-7 py-2.5 rounded-full border border-sage/60 bg-white/50 backdrop-blur-lg shadow-[0_0_30px_rgba(135,160,138,0.25)]">
+          <span class="font-display text-xs sm:text-sm uppercase tracking-[0.4em] text-sage-deep font-medium">
+            ✦ The Royal Chronicle ✦
+          </span>
+        </div>
+
+        <p class="script-font text-3xl sm:text-5xl font-light text-warm-brown/80 mb-5" style="line-height: 1.2;">
+          Celebrating the union of two souls
+        </p>
+
+        <h1 class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-wide leading-none flex flex-col items-center">
+          <span class="text-olive-ink drop-shadow-sm">Kamran Azam</span>
+          <span class="maharaja-gold font-serif italic font-normal text-4xl sm:text-6xl md:text-7xl my-2 sm:my-3">weds</span>
+          <span class="text-olive-ink drop-shadow-sm">Ilma</span>
+        </h1>
+
+        <div class="mt-7 px-8 py-3 rounded-full border border-blush/60 bg-white/50 backdrop-blur-md shadow-md">
+          <p class="font-display text-sm sm:text-base tracking-[0.3em] uppercase font-medium text-warm-brown">
+            3 November 2026
+          </p>
+        </div>
+      </div>
+
+      <div class="absolute bottom-14 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-80">
+        <span class="font-sans text-[11px] uppercase tracking-[0.4em] text-warm-brown/70">Enter Palace</span>
+        <div class="w-[2px] h-8 bg-gradient-to-b from-sage-deep to-transparent animate-pulse"></div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: ROYAL RECIPIENT (FUFFI - GROOM'S AUNT) -->
+    <section id="section-2" class="w-full flex flex-col items-center justify-center relative text-center">
+      <div class="max-w-3xl mx-auto flex flex-col items-center relative z-20">
+        <div class="w-full max-w-xs h-[2px] relative mb-10 overflow-hidden">
+          <div id="gold-line-draw" class="absolute top-0 left-0 h-full w-full bg-gradient-to-r from-transparent via-sage-deep to-transparent transform -translate-x-full transition-transform duration-1000"></div>
+        </div>
+
+        <div id="s2-badge" class="mb-5 px-6 py-2 rounded-full palace-card dotted-border-light transition-all duration-700">
+          <span id="recipient-badge-text" class="font-display text-xs sm:text-sm uppercase tracking-[0.4em] text-sage-deep font-semibold">
+            Fuffi
+          </span>
+        </div>
+
+        <h2 id="s2-name" class="font-script text-6xl sm:text-8xl md:text-9xl font-bold tracking-wider sage-gradient-text mb-8 transition-all duration-700" style="line-height: 1.1;">
+          Fuffi
+        </h2>
+
+        <p id="s2-subtext" class="cormorant-font text-2xl sm:text-4xl md:text-5xl font-light italic max-w-xl leading-snug text-olive-ink/80 transition-all duration-700">
+          "A Fuffi's love is a special blessing — full of warmth, care, and endless duas."
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PALACE MESSAGE -->
+    <section id="section-3" class="w-full flex flex-col items-center justify-center relative">
+      <div id="s3-card" class="max-w-4xl w-full palace-card p-10 sm:p-16 md:p-20 text-center relative overflow-hidden transition-all duration-700 dotted-border">
+        <div class="absolute -top-20 -left-20 w-64 h-64 bg-sage/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-blush/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="absolute top-4 left-4 text-4xl text-sage/40 font-serif">❦</div>
+        <div class="absolute top-4 right-4 text-4xl text-sage/40 font-serif">❦</div>
+        <div class="absolute bottom-4 left-4 text-4xl text-sage/40 font-serif">❦</div>
+        <div class="absolute bottom-4 right-4 text-4xl text-sage/40 font-serif">❦</div>
+
+        <p class="font-display text-xs sm:text-sm uppercase tracking-[0.45em] text-sage-deep mb-8 font-medium">
+          ✦ A Message of Love ✦
+        </p>
+
+        <h3 class="script-font text-4xl sm:text-6xl md:text-7xl font-light leading-relaxed mb-8 text-olive-ink" style="line-height: 1.3;">
+          My dear Fuffi,
+        </h3>
+
+        <p class="cormorant-font text-2xl sm:text-4xl md:text-5xl italic font-light leading-relaxed text-warm-brown/90 mb-6">
+          You are a precious part of our family — a source of love, care, and strength. Your prayers and blessings guide us every day.
+        </p>
+
+        <p class="cormorant-font text-xl sm:text-3xl md:text-4xl font-light leading-relaxed text-olive-ink/80">
+          May Allah grant you health, happiness, and a long life filled with peace. You are cherished beyond words. 🌿
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 4: GRATITUDE & BLESSING -->
+    <section id="section-4" class="w-full flex flex-col items-center justify-center relative text-center px-4 sm:px-6">
+      <div class="max-w-3xl mx-auto flex flex-col items-center w-full">
+        
+        <h2 class="font-script text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-4 sm:mb-6 tracking-tight blush-gradient-text leading-tight">
+          JazakAllahu Khairan
+        </h2>
+
+        <p class="script-font text-3xl sm:text-5xl md:text-6xl font-light italic mb-8 sm:mb-12 text-warm-brown/80 px-2" style="line-height: 1.3;">
+          Please remember us in your precious Duas <span class="inline-block transition-transform hover:scale-125 duration-300">🤲</span>
+        </p>
+
+        <div id="hidden-dua-card" class="palace-card rounded-3xl px-6 py-5 sm:px-10 sm:py-6 md:px-14 md:py-8 max-w-lg w-full dotted-border-glow transition-all duration-1000 shadow-xl mx-auto">
+          <p class="cormorant-font text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light italic leading-relaxed text-olive-ink">
+            "A Fuffi's love is a treasure. Your prayers are our greatest blessing."
+          </p>
+        </div>
+
+        <div id="secret-star-container" class="mt-8 sm:mt-12 cursor-pointer group flex flex-col items-center transition-opacity duration-1000">
+          <button id="btn-secret-star" aria-label="Royal Blessing Star" class="p-4 sm:p-5 md:p-6 rounded-full bg-sage/20 hover:bg-sage/40 border-2 border-sage/60 transition-all duration-500 transform group-hover:scale-125 shadow-[0_0_28px_rgba(135,160,138,0.35)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-sage-deep animate-spin" style="animation-duration: 14s;" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <path d="M12 .587l3.668 7.431 8.332 1.209-6.001 5.853 1.416 8.26L12 18.902l-7.415 3.898 1.416-8.26L0 9.227l8.332-1.209z"/>
+            </svg>
+          </button>
+          <span class="text-[10px] sm:text-xs uppercase tracking-[0.4em] mt-2 sm:mt-3 text-warm-brown/70 font-display">A Fuffi's Love</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ROYAL TIMELINE NAVIGATION -->
+  <footer class="fixed bottom-0 left-0 right-0 z-40 px-4 sm:px-6 py-3 sm:py-4 pointer-events-none">
+    <div class="max-w-[200px] sm:max-w-[220px] mx-auto flex flex-col gap-2 sm:gap-3">
+      <div class="w-full h-[2px] bg-olive-ink/15 relative rounded-full overflow-hidden">
+        <div id="timeline-progress-fill" class="absolute top-0 left-0 h-full w-0 bg-gradient-to-r from-sage-deep via-antique-gold to-sage-deep transition-all duration-300"></div>
+      </div>
+      <div class="flex justify-between items-center font-display text-[10px] sm:text-xs">
+        <button id="step-01" class="timeline-step w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-sage-deep text-sage-deep bg-sage/25 font-bold flex items-center justify-center scale-110 shadow-[0_0_10px_rgba(135,160,138,0.5)] transition-all cursor-pointer pointer-events-auto">I</button>
+        <button id="step-02" class="timeline-step w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-olive-ink/25 text-olive-ink/50 bg-white/40 font-medium flex items-center justify-center transition-all cursor-pointer pointer-events-auto">II</button>
+        <button id="step-03" class="timeline-step w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-olive-ink/25 text-olive-ink/50 bg-white/40 font-medium flex items-center justify-center transition-all cursor-pointer pointer-events-auto">III</button>
+        <button id="step-04" class="timeline-step w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-olive-ink/25 text-olive-ink/50 bg-white/40 font-medium flex items-center justify-center transition-all cursor-pointer pointer-events-auto">IV</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SECRET ROYAL BLESSING MODAL -->
+  <div id="modal-secret-star" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-olive-ink/40 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-700">
+    <div class="palace-card max-w-lg w-full rounded-3xl p-8 sm:p-10 md:p-14 text-center relative dotted-border-glow shadow-2xl transform scale-90 transition-transform duration-500">
+      <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-sage/25 text-sage-deep mx-auto flex items-center justify-center mb-6 sm:mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-8 sm:h-8 fill-sage-deep" viewBox="0 0 24 24" stroke="none">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </div>
+      <p class="script-font text-3xl sm:text-4xl md:text-5xl font-light leading-relaxed mb-8 sm:mb-10 text-olive-ink px-2" style="line-height: 1.3;">
+        "May Allah bless our beloved Fuffi with health, happiness, and a long life, and may her prayers always protect our family."
+      </p>
+      <button id="close-modal-secret" class="px-8 sm:px-10 py-3 sm:py-3.5 rounded-full border-2 border-sage-deep/60 font-display text-xs uppercase tracking-[0.3em] text-sage-deep hover:bg-sage/25 transition-all">
+        Ameen ✦
+      </button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const canvas = document.getElementById('royal-bg-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+
+      function resizeCanvas() {
+        width = canvas.width = window.innerWidth || 360;
+        height = canvas.height = window.innerHeight || 640;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      class RoyalParticle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height + height * 0.1;
+          this.size = Math.random() * 3 + 0.7;
+          this.speedY = Math.random() * 0.5 + 0.1;
+          this.speedX = (Math.random() - 0.5) * 0.25;
+          this.opacity = Math.random() * 0.55 + 0.25;
+          this.maxOpacity = this.opacity;
+          this.color = Math.random() > 0.5 ? '#87A08A' : '#D9A5A0';
+        }
+        update() {
+          this.y -= this.speedY;
+          this.x += this.speedX;
+          if (this.y < -15 || this.x < -15 || this.x > width + 15) {
+            this.reset();
+            this.y = height + 15;
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = this.color;
+          ctx.globalAlpha = this.opacity;
+          ctx.shadowBlur = this.size * 4;
+          ctx.shadowColor = this.color;
+          ctx.fill();
+          ctx.globalAlpha = 1.0;
+          ctx.shadowBlur = 0;
+        }
+      }
+
+      const particleCount = window.innerWidth < 768 ? 45 : 80;
+      for (let i = 0; i < particleCount; i++) particles.push(new RoyalParticle());
+
+      function animateCanvas() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animateCanvas);
+      }
+      animateCanvas();
+
+      const sections = document.querySelectorAll('section');
+      const progressFill = document.getElementById('timeline-progress-fill');
+      const lineDraw = document.getElementById('gold-line-draw');
+      const steps = [
+        document.getElementById('step-01'),
+        document.getElementById('step-02'),
+        document.getElementById('step-03'),
+        document.getElementById('step-04')
+      ];
+
+      let currentIdx = 0;
+      let navigating = false;
+
+      function updateTimeline(index) {
+        currentIdx = index;
+        if (progressFill) progressFill.style.width = `${(index / (sections.length - 1)) * 100}%`;
+        
+        steps.forEach((step, idx) => {
+          if (!step) return;
+          if (idx === index) {
+            step.className = 'timeline-step w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-sage-deep text-sage-deep bg-sage/25 font-bold flex items-center justify-center scale-110 shadow-[0_0_10px_rgba(135,160,138,0.5)] transition-all cursor-pointer pointer-events-auto';
+          } else {
+            step.className = 'timeline-step w-6 h-6 sm:w-7 sm:h-7 rounded-full border border-olive-ink/25 text-olive-ink/50 bg-white/40 font-medium flex items-center justify-center transition-all cursor-pointer pointer-events-auto';
+          }
+        });
+
+        if (index === 1 && lineDraw) lineDraw.style.transform = 'translateX(0%)';
+      }
+
+      function scrollToIndex(index) {
+        if (index < 0 || index >= sections.length || navigating) return;
+        navigating = true;
+        sections[index].scrollIntoView({ behavior: 'smooth' });
+        updateTimeline(index);
+        setTimeout(() => { navigating = false; }, 750);
+      }
+
+      window.addEventListener('wheel', (e) => {
+        if (navigating) return;
+        if (e.deltaY > 15) scrollToIndex(currentIdx + 1);
+        else if (e.deltaY < -15) scrollToIndex(currentIdx - 1);
+      }, { passive: true });
+
+      let touchStartY = 0;
+      window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+      window.addEventListener('touchend', (e) => {
+        if (navigating) return;
+        const diff = touchStartY - e.changedTouches[0].clientY;
+        if (Math.abs(diff) > 30) {
+          if (diff > 0) scrollToIndex(currentIdx + 1);
+          else scrollToIndex(currentIdx - 1);
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (navigating) return;
+        if (e.key === 'ArrowDown') scrollToIndex(currentIdx + 1);
+        else if (e.key === 'ArrowUp') scrollToIndex(currentIdx - 1);
+      });
+
+      steps.forEach((step, idx) => step?.addEventListener('click', () => scrollToIndex(idx)));
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !navigating) {
+            const idx = Array.from(sections).indexOf(entry.target);
+            updateTimeline(idx);
+          }
+        });
+      }, { threshold: 0.55 });
+      sections.forEach(sec => observer.observe(sec));
+
+      const dot = document.getElementById('cursor-dot');
+      const ring = document.getElementById('cursor-ring');
+      let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        if (dot) dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+      });
+      function renderCursor() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        if (ring) ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(renderCursor);
+      }
+      renderCursor();
+
+      window.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        const ripple = document.createElement('div');
+        ripple.className = 'touch-ripple';
+        ripple.style.left = `${touch.clientX}px`;
+        ripple.style.top = `${touch.clientY}px`;
+        ripple.style.width = '70px'; ripple.style.height = '70px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 750);
+      });
+
+      const nameEl = document.getElementById('s2-name');
+      const badgeEl = document.getElementById('recipient-badge-text');
+      if (nameEl) nameEl.textContent = 'Fuffi';
+      if (badgeEl) badgeEl.textContent = 'Fuffi';
+
+      const modal = document.getElementById('modal-secret-star');
+      const btnStar = document.getElementById('btn-secret-star');
+      const closeModal = document.getElementById('close-modal-secret');
+
+      function openModal() {
+        if (!modal) return;
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.querySelector('div')?.classList.replace('scale-90', 'scale-100');
+        for (let i = 0; i < 30; i++) particles.push(new RoyalParticle());
+      }
+      function closeModalFunc() {
+        if (!modal) return;
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.querySelector('div')?.classList.replace('scale-100', 'scale-90');
+      }
+
+      btnStar?.addEventListener('click', openModal);
+      closeModal?.addEventListener('click', closeModalFunc);
+    });
+  </script>
+</body>
+</html>
